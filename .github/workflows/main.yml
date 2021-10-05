@@ -50,5 +50,16 @@ jobs:
         run: |
           meltano elt tap-carbon-intensity target-jsonl
           echo "Extract-load completed successfully!"
+       # Upload output files as CI artifacts
+      # WARNING: do not use this option with sensitive data
+      - name: Archive output files as artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: sample-output-files
+          path: |
+            output
+            !output/**/*.md
+          retention-days: 2  # Remove artifacts after 2 days
+
 
 
